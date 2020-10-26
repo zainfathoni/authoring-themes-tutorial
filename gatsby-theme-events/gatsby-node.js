@@ -52,4 +52,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     path: basePath,
     component: require.resolve("./src/templates/events.js"),
   })
+
+  const result = await graphql(`
+    query {
+      allEvent(sort: { fields: startDate, order: ASC }) {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `)
+  if (result.errors) {
+    reporter.panic("error loading events", result.errors)
+    return
+  }
 }
