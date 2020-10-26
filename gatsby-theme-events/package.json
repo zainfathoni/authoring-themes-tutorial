@@ -12,5 +12,10 @@
     "gatsby": "^2.24.85",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "gatsby": "^2.24.85",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
