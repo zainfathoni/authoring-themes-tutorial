@@ -24,3 +24,23 @@ exports.sourceNodes = ({ actions }) => {
     }
   `)
 }
+
+// Define resolvers for custom fields
+exports.createResolvers = ({ createResolvers }) => {
+  const basePath = "/"
+  // Quick-and-dirty helper to convert strings into URL-friendly slugs.
+  const slugify = str => {
+    const slug = str
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "")
+    return `/${basePath}/${slug}`.replace(/\/\/+/g, "/")
+  }
+  createResolvers({
+    Event: {
+      slug: {
+        resolve: source => slugify(source.name),
+      },
+    },
+  })
+}
