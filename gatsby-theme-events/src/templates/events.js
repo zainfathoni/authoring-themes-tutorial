@@ -1,5 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import Layout from "../components/layout"
+import EventList from "../components/event-list"
 
 const EventsTemplate = () => {
   const data = useStaticQuery(graphql`
@@ -18,7 +20,12 @@ const EventsTemplate = () => {
     }
   `)
   const events = data.allEvent.nodes
-  return <p>TODO: Build the events page template</p>
+  
+  return (
+    <Layout>
+      <EventList events={events} />
+    </Layout>
+  )
 }
 
 export default EventsTemplate
