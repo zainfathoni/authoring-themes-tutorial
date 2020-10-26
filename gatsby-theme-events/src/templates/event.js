@@ -1,5 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Layout from "../components/layout"
+import Event from "../components/event"
 
 export const query = graphql`
   query($eventID: String!) {
@@ -14,6 +16,10 @@ export const query = graphql`
   }
 `
 
-const EventTemplate = () => <p>TODO: Build the event page template</p>
+const EventTemplate = ({ data: { event } }) => (
+  <Layout>
+    <Event {...event} />
+  </Layout>
+)
 
 export default EventTemplate
