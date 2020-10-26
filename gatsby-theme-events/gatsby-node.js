@@ -63,8 +63,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `)
+
   if (result.errors) {
     reporter.panic("error loading events", result.errors)
     return
   }
+
+  const events = result.data.allEvent.nodes
+  events.forEach(event => {
+    const slug = event.slug
+    actions.createPage({
+      path: slug,
+      component: require.resolve("./src/templates/event.js"),
+      context: {
+        eventID: event.id,
+      },
+    })
+  })
 }
