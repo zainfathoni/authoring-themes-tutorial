@@ -9,3 +9,18 @@ exports.onPreBootstrap = ({ reporter }) => {
     fs.mkdirSync(contentPath)
   }
 }
+
+// Define the "Event" type
+exports.sourceNodes = ({ actions }) => {
+  actions.createTypes(`
+    type Event implements Node @dontInfer {
+      id: ID!
+      name: String!
+      location: String!
+      startDate: Date! @dateformat @proxy(from: "start_date")
+      endDate: Date! @dateformat @proxy(from: "end_date")
+      url: String!
+      slug: String!
+    }
+  `)
+}
